@@ -74,9 +74,22 @@ function nextSequence()
   randomNumber = Math.floor(Math.random()*4);
   randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
-  $("#"+randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
-  playSound(randomChosenColour);
+  var len = gamePattern.length;
+  for (let i = 0; i < len; ++i)
+  {
+    animateSelect(i);
+  }
   userClickedPattern = [];
+}
+
+function animateSelect(index)
+{
+  var color = gamePattern[index];
+  setTimeout( function()
+    {
+      $("#"+color).fadeIn(100).fadeOut(100).fadeIn(100);
+      playSound(color);
+    }, 700*index);
 }
 
 function animatePress(currentColour)
